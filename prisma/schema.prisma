@@ -1,0 +1,143 @@
+// ============================================================
+// PetCare – Schema Prisma
+// Arquitetura: User 1:N Pet 1:N CareRecord
+// ORM: Prisma | DB: MySQL
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// ENUM: Tipos de cuidado — permite filtros tipados
+// ============================================================
+enum CareType {
+  VACCINE      // Vacinação
+  CONSULTATION // Consulta veterinária
+  MEDICATION   // Medicamento
+  EXAM         // Exame laboratorial/imagem
+  SURGERY      // Cirurgia
+  GROOMING     // Banho/tosa
+  OTHER        // Outros
+}
+
+// ============================================================
+// ENUM: Espécie do animal
+// ============================================================
+enum Species {
+  DOG
+  CAT
+  BIRD
+  RABBIT
+  FISH
+  REPTILE
+  OTHER
+}
+
+// ============================================================
+// ENUM: Sexo do animal
+// ============================================================
+enum PetGender {
+  MALE
+  FEMALE
+  UNKNOWN
+}
+
+// ============================================================
+// MODEL: User
+// Representa o tutor responsável pelos pets
+// ============================================================
+model User {
+  id        String   @id @default(uuid())
+  name      String   @db.VarChar(100)
+  email     String   @unique @db.VarChar(150)
+  password  String   @db.VarChar(255) // hash bcrypt
+  phone     String?  @db.VarChar(20)
+  avatarUrl String?  @db.VarChar(500)
+  isActive  Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relacionamentos
+  pets      Pet[]
+
+  @@map("users")
+}
+
+// ============================================================
+// MODEL: Pet
+// Animal de estimação vinculado a um tutor
+// ============================================================
+model Pet {
+  id          String     @id @default(uuid())
+  name        String     @db.VarChar(100)
+  species     Species
+  breed       String?    @db.VarChar(100)
+  gender      PetGender  @default(UNKNOWN)
+  birthDate   DateTime?  @db.Date
+  weight      Decimal?   @db.Decimal(5, 2)  // em kg
+  color       String?    @db.VarChar(50)
+  microchip   String?    @unique @db.VarChar(50)
+  photoUrl    String?    @db.VarChar(500)
+  notes       String?    @db.Text
+  isActive    Boolean    @default(true)
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  // FK → User
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Relacionamentos
+  careRecords CareRecord[]
+
+  // Índices para performance
+  @@index([userId])
+  @@index([species])
+  @@map("pets")
+}
+
+// ============================================================
+// MODEL: CareRecord
+// Histórico cronológico de cuidados do pet
+// Suporta filtro por tipo, data e status
+// ============================================================
+model CareRecord {
+  id            String    @id @default(uuid())
+  type          CareType
+  title         String    @db.VarChar(200)   // ex: "Vacina antirrábica V10"
+  description   String?   @db.Text
+  performedAt   DateTime                     // data/hora do cuidado (cronologia)
+  nextDueAt     DateTime?                    // próximo agendamento (ex: reforço)
+  veterinarian  String?   @db.VarChar(100)   // nome do veterinário
+  clinic        String?   @db.VarChar(150)   // nome da clínica
+  cost          Decimal?  @db.Decimal(8, 2)  // custo em reais
+  attachmentUrl String?   @db.VarChar(500)   // link de laudo/receita
+  batchNumber   String?   @db.VarChar(50)    // lote (relevante para vacinas)
+  dosage        String?   @db.VarChar(100)   // dosagem (relevante para medicamentos)
+  isCompleted   Boolean   @default(true)
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // FK → Pet
+  petId         String
+  pet           Pet       @relation(fields: [petId], references: [id], onDelete: Cascade)
+
+  // Índices para filtros e ordenação cronológica
+  @@index([petId])
+  @@index([type])
+  @@index([performedAt])           // ORDER BY performedAt DESC
+  @@index([petId, type])           // filtro composto: pet + tipo
+  @@index([petId, performedAt])    // histórico cronológico por pet
+  @@index([nextDueAt])             // alertas de próximos cuidados
+
+  @@map("care_records")
+}
