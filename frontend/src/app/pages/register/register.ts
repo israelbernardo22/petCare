@@ -42,7 +42,7 @@ export class Register {
 
     this.apiService.register(data).subscribe({
       next: () => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       },
       error: (err) => {
         this.errorMessage.set(err.error?.error || 'Erro ao criar conta.');
