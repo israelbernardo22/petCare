@@ -40,7 +40,7 @@ export class PetComponent implements OnInit {
     birthDate: [''],
     weight: [''],
     color: [''],
-    microchip: [''],
+    microchip: [null],
     notes: [''],
   });
 
