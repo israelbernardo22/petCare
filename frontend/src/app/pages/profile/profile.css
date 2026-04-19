@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500&display=swap');
+* { font-family: 'DM Sans', sans-serif; box-sizing: border-box; }
+
+.ep-page { background: #f5f7fa; min-height: 100vh; padding: 2rem 1.5rem; }
+.ep-content { max-width: 580px; margin: 0 auto; }
+
+.ep-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+
+.ep-back {
+  background: none; border: 0.5px solid #ddd; border-radius: 8px;
+  padding: 7px 14px; font-size: 13px; color: #888; cursor: pointer; transition: all 0.15s;
+}
+.ep-back:hover { background: #eff6ff; color: #2563EB; border-color: #2563EB; }
+
+.ep-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; margin: 0; color: #111; }
+
+.ep-success {
+  background: #d1fae5; color: #065f46; border: 0.5px solid #6ee7b7;
+  border-radius: 10px; padding: 14px; font-size: 14px; margin-bottom: 1.5rem; text-align: center;
+}
+.ep-error {
+  background: #fee2e2; color: #991b1b; border: 0.5px solid #fca5a5;
+  border-radius: 10px; padding: 14px; font-size: 14px; margin-bottom: 1.5rem;
+}
+
+.ep-section {
+  background: white; border: 0.5px solid #e8eaf0;
+  border-radius: 14px; padding: 1.5rem; margin-bottom: 1rem;
+}
+
+.ep-section-label {
+  font-size: 11px; font-weight: 500; color: #aaa;
+  letter-spacing: 0.07em; text-transform: uppercase; margin: 0 0 1rem;
+}
+
+.ep-field { display: flex; flex-direction: column; margin-bottom: 12px; }
+.ep-field:last-child { margin-bottom: 0; }
+.ep-label { font-size: 12px; font-weight: 500; color: #888; margin-bottom: 6px; }
+
+.ep-input {
+  height: 42px; border: 0.5px solid #ddd; border-radius: 9px;
+  padding: 0 12px; font-size: 14px; background: #fafafa;
+  color: #111; outline: none; transition: border-color 0.15s; width: 100%;
+}
+.ep-input:focus { border-color: #2563EB; background: white; }
+
+.ep-btn {
+  width: 100%; height: 48px; background: #2563EB; color: white;
+  border: none; border-radius: 10px; font-size: 15px; font-weight: 500;
+  cursor: pointer; margin-top: 0.5rem; transition: background 0.15s;
+}
+.ep-btn:hover { background: #1d4ed8; }
+.ep-btn:disabled { background: #93c5fd; cursor: not-allowed; }

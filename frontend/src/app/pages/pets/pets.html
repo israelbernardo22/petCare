@@ -1,0 +1,91 @@
+<app-navbar></app-navbar>
+
+<div class="pf-page">
+  <div class="pf-content">
+
+    <div class="pf-header">
+      <button class="pf-back" (click)="goBack()">← Voltar</button>
+      <h2 class="pf-title">{{ isEdit() ? 'Editar pet' : 'Novo pet' }}</h2>
+    </div>
+
+    @if (success()) {
+      <div class="pf-success">✅ Pet salvo com sucesso! Redirecionando...</div>
+    }
+    @if (errorMsg()) {
+      <div class="pf-error">{{ errorMsg() }}</div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div class="pf-section">
+        <p class="pf-section-label">Informações básicas</p>
+        <div class="pf-grid-2">
+          <div class="pf-field">
+            <label class="pf-label">Nome *</label>
+            <input formControlName="name" class="pf-input" placeholder="Nome do pet" />
+          </div>
+          <div class="pf-field">
+            <label class="pf-label">Espécie *</label>
+            <select formControlName="species" class="pf-input">
+              <option value="">Selecione...</option>
+              @for (s of species; track s) {
+                <option [value]="s">{{ speciesLabels[s] }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        <div class="pf-grid-2">
+          <div class="pf-field">
+            <label class="pf-label">Raça</label>
+            <input formControlName="breed" class="pf-input" placeholder="Ex: Golden Retriever" />
+          </div>
+          <div class="pf-field">
+            <label class="pf-label">Gênero</label>
+            <select formControlName="gender" class="pf-input">
+              <option value="UNKNOWN">Não informado</option>
+              <option value="MALE">Macho</option>
+              <option value="FEMALE">Fêmea</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <p class="pf-section-label">Detalhes físicos</p>
+        <div class="pf-grid-2">
+          <div class="pf-field">
+            <label class="pf-label">Data de nascimento</label>
+            <input formControlName="birthDate" type="date" class="pf-input" />
+          </div>
+          <div class="pf-field">
+            <label class="pf-label">Peso (kg)</label>
+            <input formControlName="weight" type="number" class="pf-input" placeholder="Ex: 12.5" />
+          </div>
+        </div>
+        <div class="pf-grid-2">
+          <div class="pf-field">
+            <label class="pf-label">Cor</label>
+            <input formControlName="color" class="pf-input" placeholder="Ex: Caramelo" />
+          </div>
+          <div class="pf-field">
+            <label class="pf-label">Microchip</label>
+            <input formControlName="microchip" type="number" class="pf-input" placeholder="Número do chip" />
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <p class="pf-section-label">Observações</p>
+        <div class="pf-field">
+          <label class="pf-label">Notas</label>
+          <textarea formControlName="notes" class="pf-input pf-textarea" placeholder="Alergias, comportamento, observações gerais..."></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="pf-btn" [disabled]="form.invalid || isLoading()">
+        @if (isLoading()) { Salvando... } @else { {{ isEdit() ? 'Salvar alterações' : 'Cadastrar pet' }} }
+      </button>
+
+    </form>
+  </div>
+</div>

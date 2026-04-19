@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500&display=swap');
+
+.nb-nav {
+  background: white;
+  border-bottom: 0.5px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nb-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nb-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.nb-paw { font-size: 20px; }
+
+.nb-brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+}
+
+.nb-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nb-link {
+ background: none;
+  border: 0.5px solid #eee;
+  border-radius: 8px;
+  padding: 7px 16px;
+  font-size: 13px;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.nb-link:hover, .nb-link-active {
+  background: #f4f3f0;
+  color: #111;
+}
+
+.nb-profile {
+  background: none;
+  border: 0.5px solid #eee;
+  border-radius: 8px;
+  padding: 7px 16px;
+  font-size: 13px;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.nb-profile:hover {
+  background: #fff0f0;
+  color: #c0392b;
+  border-color: #f5c6c6;
+}

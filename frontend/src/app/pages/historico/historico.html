@@ -1,0 +1,59 @@
+<app-navbar></app-navbar>
+
+<div class="hist-page">
+  <div class="hist-content">
+
+    <div class="hist-header">
+      <button class="hist-back" (click)="goBack()">← Voltar</button>
+      <h2 class="hist-title">Histórico de cuidados</h2>
+    </div>
+
+    @if (isLoading()) {
+      <div class="hist-loading">Carregando...</div>
+    } @else if (records().length === 0) {
+      <div class="hist-empty">
+        <p class="hist-empty-icon">📋</p>
+        <p>Nenhum registro encontrado para este pet.</p>
+      </div>
+    } @else {
+      <div class="hist-list">
+        @for (record of records(); track record.id) {
+          <div class="hist-card">
+            <div class="hist-card-left">
+              <span class="hist-icon">{{ careIcons[record.type] }}</span>
+            </div>
+            <div class="hist-card-body">
+              <div class="hist-card-top">
+                <span class="hist-badge" [ngClass]="careColors[record.type]">
+                  {{ careLabels[record.type] }}
+                </span>
+                <span class="hist-date">{{ formatDate(record.performedAt) }}</span>
+              </div>
+              <h5 class="hist-card-title">{{ record.title }}</h5>
+              @if (record.description) {
+                <p class="hist-card-desc">{{ record.description }}</p>
+              }
+              <div class="hist-card-meta">
+                @if (record.veterinarian) {
+                  <span class="hist-meta-item">🩺 {{ record.veterinarian }}</span>
+                }
+                @if (record.clinic) {
+                  <span class="hist-meta-item">🏥 {{ record.clinic }}</span>
+                }
+                @if (record.cost) {
+                  <span class="hist-meta-item">💰 R$ {{ record.cost }}</span>
+                }
+                @if (record.dosage) {
+                  <span class="hist-meta-item">💊 {{ record.dosage }}</span>
+                }
+                @if (record.nextDueAt) {
+                  <span class="hist-meta-item hist-next">📅 Próxima: {{ formatDate(record.nextDueAt) }}</span>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>
