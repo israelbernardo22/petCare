@@ -17,4 +17,9 @@ async function updatePet(id, data) {
   return prisma.pet.update({ where: { id }, data });
 }
 
-module.exports = { createPet, listPetsByUser, getPetById, updatePet };
+async function deletePet(id) 
+{
+  return prisma.pet.delete({ where: { id } });
+}
+
+module.exports = { createPet, listPetsByUser, getPetById, updatePet, deletePet };

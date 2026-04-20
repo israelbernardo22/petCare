@@ -22,6 +22,8 @@ export class CareComponent implements OnInit {
   isLoading = signal(false);
   success = signal(false);
   errorMsg = signal('');
+  recordId = "";
+  isEdit = signal(false);
 
   careTypes = [
     { value: 'VACCINE', label: '💉 Vacina' },
@@ -48,7 +50,25 @@ export class CareComponent implements OnInit {
 
   ngOnInit() {
     this.petId = this.route.snapshot.paramMap.get('petId') || '';
+     this.recordId = this.route.snapshot.paramMap.get('recordId') || '';
+  if (this.recordId) {
+    this.isEdit.set(true);
+    this.loadRecord(this.recordId, this.petId);
   }
+  }
+
+  loadRecord(id: string, petId: string) {
+  this.apiService.getRecordById(petId, id).subscribe({
+    next: (record: any) => {
+      this.form.patchValue({
+        ...record,
+        performedAt: record.performedAt?.substring(0, 10),
+        nextDueAt: record.nextDueAt?.substring(0, 10)
+      });
+    },
+    error: () => this.errorMsg.set('Erro ao carregar registro.')
+  });
+}
 
   onSubmit() {
     if (this.form.invalid) return;
@@ -63,17 +83,21 @@ export class CareComponent implements OnInit {
       cost: this.form.value.cost ? parseFloat(this.form.value.cost) : null,
     };
 
-    this.apiService.createCare(data).subscribe({
-      next: () => {
-        this.success.set(true);
-        this.isLoading.set(false);
-        setTimeout(() => this.router.navigate(['/dashboard']), 1500);
-      },
-      error: (err) => {
-        this.errorMsg.set(err.error?.message || 'Erro ao salvar registro.');
-        this.isLoading.set(false);
-      }
-    });
+    const request = this.isEdit()
+  ? this.apiService.updateCare(this.recordId, data)
+  : this.apiService.createCare(data);
+
+request.subscribe({
+  next: () => {
+    this.success.set(true);
+    this.isLoading.set(false);
+    setTimeout(() => this.router.navigate(['/dashboard']), 1500);
+  },
+  error: (err) => {
+    this.errorMsg.set(err.error?.message || 'Erro ao salvar registro.');
+    this.isLoading.set(false);
+  }
+});
   }
 
   goBack() { this.router.navigate(['/dashboard']); }

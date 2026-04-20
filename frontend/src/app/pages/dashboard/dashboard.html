@@ -28,8 +28,17 @@
                 [ngClass]="{'bg-info': pet.gender === 'MALE', 'bg-danger': pet.gender === 'FEMALE', 'bg-secondary': pet.gender === 'UNKNOWN'}">
             {{ pet.gender === 'MALE' ? 'Macho' : pet.gender === 'FEMALE' ? 'Fêmea' : 'N/I' }}
           </span>
-          <button class="btn btn-sm btn-light border position-absolute top-0 end-0 m-3" (click)="navigateToEditPet(pet.id)">
+          <button 
+            class="btn btn-sm btn-light border position-absolute top-0 end-0 m-3" 
+            style="z-index: 2;"
+            (click)="navigateToEditPet(pet.id)">
             <i class="bi bi-pencil-fill text-primary"></i>
+          </button>
+          <button 
+            class="btn btn-sm btn-light border position-absolute top-0 end-0 m-3" 
+            style="transform: translateX(-40px); z-index: 2;"
+            (click)="deletePet(pet.id)">
+            <i class="bi bi-trash-fill text-danger"></i>
           </button>
           <div class="card-body p-4 text-center">
          <div class="avatar-emoji mb-3">

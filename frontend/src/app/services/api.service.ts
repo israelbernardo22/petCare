@@ -42,12 +42,27 @@ updatePet(id: string, data: any) {
   return this.http.put(`${this.baseUrl}/pets/${id}`, data);
 }
 
+deleteRecord(id: string) {
+  return this.http.delete(`${this.baseUrl}/care/${id}`);
+}
+
 getUserById(id: string) {
   return this.http.get(`${this.baseUrl}/users/${id}`);
+}
+
+getRecordById(petid: string, id: string) {
+  return this.http.get(`${this.baseUrl}/care/${petid}/${id}`);
+}
+
+updateCare(id: string, data: any) {
+  return this.http.put(`${this.baseUrl}/care/${id}`, data);
 }
 
 updateUser(id: string, data: any) {
   return this.http.put(`${this.baseUrl}/users/${id}`, data);
 }
 
+deletePet(id: string) {
+  return this.http.delete(`${this.baseUrl}/pets/${id}`);    
+}
 }

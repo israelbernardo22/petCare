@@ -9,7 +9,7 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
+  id Int @id @default(autoincrement())
   name      String   @db.VarChar(100)
   email     String   @unique @db.VarChar(150)
   password  String   @db.VarChar(255)
@@ -24,7 +24,7 @@ model User {
 }
 
 model Pet {
-  id          String       @id @default(uuid())
+  id          Int         @id @default(autoincrement())
   name        String       @db.VarChar(100)
   species     Species
   breed       String?      @db.VarChar(100)
@@ -48,7 +48,7 @@ model Pet {
 }
 
 model CareRecord {
-  id            String    @id @default(uuid())
+  id              Int      @id     @default(autoincrement())
   type          CareType
   title         String    @db.VarChar(200)
   description   String?   @db.Text

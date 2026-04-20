@@ -22,7 +22,6 @@ export class Dashboard implements OnInit {
   
   userName = signal<string>('Usuário');
   pets = signal<any[]>([]);
-  petsCount = signal<number>(0);
   isLoading = signal<boolean>(true);
 
   ngOnInit(): void {
@@ -41,6 +40,7 @@ export class Dashboard implements OnInit {
     }
   }
 
+  
 getSpeciesEmoji(species: string): string {
   const emojis: Record<string, string> = {
     DOG: '🐶',
@@ -79,9 +79,18 @@ getSpeciesEmoji(species: string): string {
   navigateToAddPet(): void {
     this.router.navigate(['/pets/novo']);
   }
-
+deletePet(petId: string): void {
+  if (!confirm('Tem certeza que deseja excluir este pet?')) return;
+  this.apiService.deletePet(petId).subscribe({
+    next: () => {
+      this.pets.set(this.pets().filter(p => p.id !== petId));
+    },
+    error: () => {
+      alert('Erro ao excluir pet');
+    }
+  });
+}
   navigateToEditPet(petId: string): void {
-    // Passa o ID via rota para o formulário de edição
     this.router.navigate(['/pets/editar', petId]);
   }
   navigateToRegisterCare(petId: string): void {

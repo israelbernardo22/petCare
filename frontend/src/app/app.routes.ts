@@ -36,7 +36,7 @@ export const routes: Routes = [
     component: HistoricoComponent, 
     canActivate: [authGuard] 
   },
-  
+  { path: 'care/:petId/:recordId', component: CareComponent, canActivate: [authGuard] },
   { path: 'perfil/:id', component: Profile, canActivate: [authGuard] },
   
 ];

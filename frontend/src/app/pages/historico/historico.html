@@ -24,6 +24,20 @@
             </div>
             <div class="hist-card-body">
               <div class="hist-card-top">
+                  
+              <button 
+                class="btn btn-sm btn-light border position-absolute top-0 end-0 m-3" 
+                style="z-index: 2;"
+                (click)="navigateToEditRegister(record.id)">
+                <i class="bi bi-pencil-fill text-primary"></i>
+              </button>
+              <button 
+                class="btn btn-sm btn-light border position-absolute top-0 end-0 m-3" 
+                style="transform: translateX(-40px); z-index: 2;"
+                (click)="deleteRecord(record.id)">
+                <i class="bi bi-trash-fill text-danger"></i>
+              </button>
+
                 <span class="hist-badge" [ngClass]="careColors[record.type]">
                   {{ careLabels[record.type] }}
                 </span>

@@ -28,6 +28,15 @@ async function list(req, res) {
   }
 }
 
+async function remove(req, res) {
+  try {
+    await service.deletePet(req.params.id);
+    res.status(204).send();
+  } catch (e) {
+    res.status(400).json({ message: e.message });
+  }
+}
+
 async function getById(req, res) {
   try {
     const pet = await service.getPetById(req.params.id);
@@ -46,4 +55,4 @@ async function update(req, res) {
   }
 }
 
-module.exports = { create, list, getById, update };
+module.exports = { create, list, getById, update, remove };
