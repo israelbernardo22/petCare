@@ -2,7 +2,6 @@
 
 <main class="rc-page">
   <div class="rc-content">
-
     <header class="rc-header">
       <button class="rc-back" (click)="goBack()" aria-label="Voltar para a página anterior">
         <i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar
@@ -23,10 +22,9 @@
     }
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
       <fieldset class="rc-section">
         <legend class="rc-section-label">Informações básicas</legend>
-        
+
         <div class="rc-grid-2">
           <div class="rc-field">
             <label class="rc-label" for="type">Tipo de cuidado *</label>
@@ -45,7 +43,12 @@
 
         <div class="rc-field">
           <label class="rc-label" for="description">Descrição</label>
-          <textarea id="description" formControlName="description" class="rc-input rc-textarea" placeholder="Detalhes do cuidado..."></textarea>
+          <textarea
+            id="description"
+            formControlName="description"
+            class="rc-input rc-textarea"
+            placeholder="Detalhes do cuidado..."
+          ></textarea>
         </div>
 
         <div class="rc-grid-2">
@@ -65,7 +68,12 @@
         <div class="rc-grid-2">
           <div class="rc-field">
             <label class="rc-label" for="veterinarian">Veterinário</label>
-            <input id="veterinarian" formControlName="veterinarian" class="rc-input" placeholder="Nome do profissional" />
+            <input
+              id="veterinarian"
+              formControlName="veterinarian"
+              class="rc-input"
+              placeholder="Nome do profissional"
+            />
           </div>
           <div class="rc-field">
             <label class="rc-label" for="clinic">Clínica</label>
@@ -91,15 +99,11 @@
           </div>
         </div>
       </fieldset>
-
       <button type="submit" class="rc-btn" [disabled]="form.invalid || isLoading()">
-        @if (isLoading()) { 
-          <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span> Salvando... 
-        } @else { 
-          Salvar registro 
-        }
-      </button>
+        <span *ngIf="isLoading()" class="spinner-border spinner-border-sm me-2"></span>
 
+        {{ isLoading() ? 'Salvando...' : isEdit() ? 'Salvar alterações' : 'Cadastrar Registro' }}
+      </button>
     </form>
   </div>
 </main>

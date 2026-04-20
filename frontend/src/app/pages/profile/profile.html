@@ -2,7 +2,6 @@
 
 <main class="ep-page">
   <div class="ep-content">
-
     <header class="ep-header">
       <button class="ep-back" (click)="goBack()" aria-label="Voltar para a página anterior">
         <i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar
@@ -15,7 +14,7 @@
         <i class="bi bi-check-circle-fill" aria-hidden="true"></i> Perfil atualizado! Redirecionando...
       </div>
     }
-    
+
     @if (errorMsg()) {
       <div class="ep-alert ep-error" role="alert">
         <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i> {{ errorMsg() }}
@@ -23,15 +22,14 @@
     }
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
       <fieldset class="ep-section">
         <legend class="ep-section-label">Informações pessoais</legend>
-        
+
         <div class="ep-field">
           <label class="ep-label" for="name">Nome *</label>
           <input id="name" formControlName="name" class="ep-input" placeholder="Seu nome completo" />
         </div>
-        
+
         <div class="ep-grid-2">
           <div class="ep-field">
             <label class="ep-label" for="email">E-mail *</label>
@@ -40,33 +38,48 @@
           <div class="ep-field">
             <label class="ep-label" for="phone">Telefone</label>
             <input id="phone" formControlName="phone" class="ep-input" placeholder="(31) 99999-9999" />
+
+            @if (form.get('phone')?.hasError('invalidPhone') && form.get('phone')?.touched) {
+              <small class="text-danger mt-1 d-block">
+                <i class="bi bi-info-circle"></i> O telefone precisa ter o DDD + 9 dígitos.
+              </small>
+            }
           </div>
         </div>
       </fieldset>
 
       <fieldset class="ep-section">
         <legend class="ep-section-label">Alterar senha <span class="fw-normal text-muted">(opcional)</span></legend>
-        
+
         <div class="ep-grid-2">
           <div class="ep-field">
             <label class="ep-label" for="password">Nova senha</label>
-            <input id="password" formControlName="password" type="password" class="ep-input" placeholder="Deixe vazio para manter" />
+            <input
+              id="password"
+              formControlName="password"
+              type="password"
+              class="ep-input"
+              placeholder="Deixe vazio para manter"
+            />
           </div>
           <div class="ep-field">
             <label class="ep-label" for="confirmPassword">Confirmar nova senha</label>
-            <input id="confirmPassword" formControlName="confirmPassword" type="password" class="ep-input" placeholder="Repita a nova senha" />
+            <input
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              type="password"
+              class="ep-input"
+              placeholder="Repita a nova senha"
+            />
           </div>
         </div>
       </fieldset>
 
       <button type="submit" class="ep-btn" [disabled]="form.invalid || isLoading()">
-        @if (isLoading()) { 
-          <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span> Salvando... 
-        } @else { 
-          Salvar alterações 
-        }
-      </button>
+        <span *ngIf="isLoading()" class="spinner-border spinner-border-sm me-2"></span>
 
+        {{ isLoading() ? 'Salvando...' : 'Salvar alterações' }}
+      </button>
     </form>
   </div>
 </main>

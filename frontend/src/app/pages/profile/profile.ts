@@ -4,19 +4,20 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { Navbar } from '../navbar/navbar';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, Navbar],
   templateUrl: './profile.html',
-  styleUrls: ['./profile.scss']
+  styleUrls: ['./profile.scss'],
 })
 export class Profile implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private apiService = inject(ApiService);
-private route = inject(ActivatedRoute);
+  private route = inject(ActivatedRoute);
   isLoading = signal(false);
   success = signal(false);
   errorMsg = signal('');
@@ -25,21 +26,36 @@ private route = inject(ActivatedRoute);
   form: FormGroup = this.fb.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    phone: [''],
+    phone: ['', [this.phoneValidator()]],
     avatarUrl: [''],
     password: [''],
     confirmPassword: [''],
   });
 
   ngOnInit() {
-this.userId = this.route.snapshot.paramMap.get('id') || '';
+    this.userId = this.route.snapshot.paramMap.get('id') || '';
     this.loadUser();
+  }
+
+  phoneValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+
+      if (!value) {
+        return null;
+      }
+      const numbersOnly = value.toString().replace(/\D/g, '');
+      if (numbersOnly.length !== 11) {
+        return { invalidPhone: true };
+      }
+      return null;
+    };
   }
 
   loadUser() {
     this.apiService.getUserById(this.userId).subscribe({
       next: (user: any) => this.form.patchValue(user),
-      error: () => this.errorMsg.set('Erro ao carregar perfil.')
+      error: () => this.errorMsg.set('Erro ao carregar perfil.'),
     });
   }
 
@@ -74,9 +90,11 @@ this.userId = this.route.snapshot.paramMap.get('id') || '';
       error: (err) => {
         this.errorMsg.set(err.error?.error || 'Erro ao atualizar perfil.');
         this.isLoading.set(false);
-      }
+      },
     });
   }
 
-  goBack() { this.router.navigate(['/dashboard']); }
+  goBack() {
+    this.router.navigate(['/dashboard']);
+  }
 }
