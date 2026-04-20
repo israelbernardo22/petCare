@@ -9,7 +9,7 @@ import { Navbar } from '../navbar/navbar';
   standalone: true,
   imports: [CommonModule, Navbar],
   templateUrl: './historico.html',
-  styleUrls: ['./historico.css']
+  styleUrls: ['./historico.scss']
 })
 export class HistoricoComponent implements OnInit {
   private route = inject(ActivatedRoute);

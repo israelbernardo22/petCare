@@ -1,0 +1,228 @@
+$color-title: #2C3558;       
+$color-text: #6B728E;        
+$color-primary: #20A68A;     
+$bg-gradient: linear-gradient(135deg, #F0F4F3 0%, #E4E8E9 100%);
+
+.hist-page {
+  min-height: calc(100vh - 70px);
+  background: $bg-gradient;
+  padding: 3rem 1rem;
+  font-family: var(--font-main, 'Poppins', sans-serif);
+  display: flex;
+  justify-content: center;
+}
+
+.hist-content {
+  background-color: #FFFFFF;
+  width: 100%;
+  max-width: 800px;
+  padding: 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 12px 40px rgba(44, 53, 88, 0.08);
+}
+
+.hist-badge {
+  background-color: #E8F3F1; 
+  color: #20A68A;            
+  border-radius: 8px;
+  padding: 0.4rem 0.6rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: none;
+}
+
+.hist-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #EAECEF;
+  padding-bottom: 1.5rem;
+
+  .hist-back {
+    align-self: flex-start;
+    background: transparent;
+    border: none;
+    color: $color-text;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0;
+    transition: color 0.2s ease;
+
+    &:hover { color: $color-primary; }
+  }
+
+  .hist-title {
+    color: $color-title;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -0.5px;
+  }
+}
+
+
+.hist-loading, .hist-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: $color-text;
+  
+  .hist-empty-icon {
+    font-size: 3rem;
+    color: #D1D5DB;
+    margin-bottom: 1rem;
+  }
+}
+
+.hist-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; 
+}
+
+.hist-card {
+  display: flex;
+  border: 1px solid #EAECEF;
+  border-radius: 20px;
+  background-color: #FAFAFB;
+  transition: all 0.2s ease;
+  position: relative; 
+  overflow: hidden;
+
+  &:hover {
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 25px rgba(44, 53, 88, 0.06);
+    border-color: rgba(32, 166, 138, 0.2); 
+  }
+
+  .hist-card-left {
+    background-color: rgba(32, 166, 138, 0.1);
+    min-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .hist-icon {
+      font-size: 2rem;
+    }
+  }
+
+
+  .hist-card-body {
+    padding: 1.5rem;
+    flex: 1;
+  }
+}
+
+.hist-actions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+
+  .btn-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    border: 1px solid #E2E6EA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+
+    i { font-size: 0.85rem; }
+
+    &:hover {
+      background-color: #F8F9FA;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.hist-card-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  padding-right: 80px; 
+
+  .hist-date {
+    color: $color-text;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+}
+
+.hist-card-title {
+  color: $color-title;
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+
+.hist-card-desc {
+  color: $color-text;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.hist-card-meta {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 0.75rem;
+
+  .hist-meta-item {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E6EA;
+    padding: 0.4rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: $color-text;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    i { color: $color-primary; font-size: 0.9rem; }
+  }
+
+  .hist-next {
+    background-color: rgba(245, 158, 11, 0.1); 
+    color: #B45309; 
+
+    i { color: #B45309; }
+  }
+}
+
+
+@media (max-width: 600px) {
+  .hist-card {
+    flex-direction: column; 
+    
+    .hist-card-left {
+      min-height: 60px; 
+    }
+
+    .hist-card-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding-right: 0;
+      margin-top: 1.5rem; 
+    }
+  }
+}

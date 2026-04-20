@@ -10,7 +10,7 @@ import { Navbar } from '../navbar/navbar';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, Navbar],
   templateUrl: './care.html',
-  styleUrls: ['./care.css']
+  styleUrls: ['./care.scss']
 })
 export class CareComponent implements OnInit {
   private fb = inject(FormBuilder);

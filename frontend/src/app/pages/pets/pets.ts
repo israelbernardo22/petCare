@@ -11,7 +11,7 @@ import { Navbar } from '../navbar/navbar';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, Navbar],
   templateUrl: './pets.html',
-  styleUrls: ['./pets.css']
+  styleUrls: ['./pets.scss']
 })
 export class PetComponent implements OnInit {
   private fb = inject(FormBuilder);

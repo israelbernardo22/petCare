@@ -1,0 +1,109 @@
+$color-title: #2C3558;       
+$color-text: #6B728E;        
+$color-primary: #20A68A;     
+$color-primary-hover: #178870; 
+$color-bg-light: #FFFFFF;
+$color-danger: #E63946;      
+$color-danger-bg: #FDF0F1;   
+
+.nb-nav {
+  background-color: $color-bg-light;
+  box-shadow: 0 4px 20px rgba(44, 53, 88, 0.05); 
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: var(--font-main, 'Poppins', sans-serif);
+}
+
+.nb-inner {
+  max-width: 1200px; 
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nb-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.02); 
+  }
+
+  .nb-paw {
+    font-size: 2rem;
+  }
+
+  .nb-brand-name {
+    color: $color-primary;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+}
+
+.nb-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem; 
+
+  button {
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 50px; 
+  }
+
+ 
+  .nb-link {
+    color: $color-text;
+
+    &:hover {
+      color: $color-primary;
+      background-color: rgba(32, 166, 138, 0.05); 
+    }
+  }
+
+  .nb-logout {
+    color: $color-text;
+    border: 1.5px solid transparent;
+
+    &:hover {
+      color: $color-danger;
+      background-color: $color-danger-bg;
+      border-color: rgba(230, 57, 70, 0.1);
+    }
+  }
+}
+
+
+@media (max-width: 576px) {
+  .nb-inner {
+    padding: 1rem;
+  }
+  
+  .nb-brand .nb-brand-name {
+    font-size: 1.25rem; 
+  }
+
+  .nb-right {
+    gap: 0.25rem;
+
+    button {
+      padding: 0.5rem;
+      font-size: 0.85rem;
+    }
+  }
+}

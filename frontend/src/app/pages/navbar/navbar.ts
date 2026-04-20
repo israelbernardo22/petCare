@@ -6,7 +6,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-navbar',
   imports: [],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.css',
+  styleUrl: './navbar.scss',
 })
 export class Navbar {
   userId: any;

@@ -1,31 +1,36 @@
 <app-navbar></app-navbar>
 
-<div class="rc-page">
+<main class="rc-page">
   <div class="rc-content">
 
-    <div class="rc-header">
-      <button class="rc-back" (click)="goBack()">← Voltar</button>
-      <h2 class="rc-title">Registrar cuidado</h2>
-    </div>
+    <header class="rc-header">
+      <button class="rc-back" (click)="goBack()" aria-label="Voltar para a página anterior">
+        <i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar
+      </button>
+      <h2 class="rc-title">Registrar Cuidado</h2>
+    </header>
 
     @if (success()) {
-      <div class="rc-success">
-        ✅ Registro salvo com sucesso! Redirecionando...
+      <div class="rc-alert rc-success" role="alert">
+        <i class="bi bi-check-circle-fill" aria-hidden="true"></i> Registro salvo com sucesso! Redirecionando...
       </div>
     }
 
     @if (errorMsg()) {
-      <div class="rc-error">{{ errorMsg() }}</div>
+      <div class="rc-alert rc-error" role="alert">
+        <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i> {{ errorMsg() }}
+      </div>
     }
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-      <div class="rc-section">
-        <p class="rc-section-label">Informações básicas</p>
+      <fieldset class="rc-section">
+        <legend class="rc-section-label">Informações básicas</legend>
+        
         <div class="rc-grid-2">
           <div class="rc-field">
-            <label class="rc-label">Tipo de cuidado *</label>
-            <select formControlName="type" class="rc-input">
+            <label class="rc-label" for="type">Tipo de cuidado *</label>
+            <select id="type" formControlName="type" class="rc-input">
               <option value="">Selecione...</option>
               @for (t of careTypes; track t.value) {
                 <option [value]="t.value">{{ t.label }}</option>
@@ -33,64 +38,68 @@
             </select>
           </div>
           <div class="rc-field">
-            <label class="rc-label">Título *</label>
-            <input formControlName="title" class="rc-input" placeholder="Ex: Vacina V10 anual" />
+            <label class="rc-label" for="title">Título *</label>
+            <input id="title" formControlName="title" class="rc-input" placeholder="Ex: Vacina V10 anual" />
           </div>
         </div>
 
         <div class="rc-field">
-          <label class="rc-label">Descrição</label>
-          <textarea formControlName="description" class="rc-input rc-textarea" placeholder="Detalhes do cuidado..."></textarea>
+          <label class="rc-label" for="description">Descrição</label>
+          <textarea id="description" formControlName="description" class="rc-input rc-textarea" placeholder="Detalhes do cuidado..."></textarea>
         </div>
 
         <div class="rc-grid-2">
           <div class="rc-field">
-            <label class="rc-label">Data realizada *</label>
-            <input formControlName="performedAt" type="date" class="rc-input" />
+            <label class="rc-label" for="performedAt">Data realizada *</label>
+            <input id="performedAt" formControlName="performedAt" type="date" class="rc-input" />
           </div>
           <div class="rc-field">
-            <label class="rc-label">Próxima data</label>
-            <input formControlName="nextDueAt" type="date" class="rc-input" />
+            <label class="rc-label" for="nextDueAt">Próxima data</label>
+            <input id="nextDueAt" formControlName="nextDueAt" type="date" class="rc-input" />
           </div>
         </div>
-      </div>
+      </fieldset>
 
-      <div class="rc-section">
-        <p class="rc-section-label">Clínica e veterinário</p>
+      <fieldset class="rc-section">
+        <legend class="rc-section-label">Clínica e Veterinário</legend>
         <div class="rc-grid-2">
           <div class="rc-field">
-            <label class="rc-label">Veterinário</label>
-            <input formControlName="veterinarian" class="rc-input" placeholder="Nome do veterinário" />
+            <label class="rc-label" for="veterinarian">Veterinário</label>
+            <input id="veterinarian" formControlName="veterinarian" class="rc-input" placeholder="Nome do profissional" />
           </div>
           <div class="rc-field">
-            <label class="rc-label">Clínica</label>
-            <input formControlName="clinic" class="rc-input" placeholder="Nome da clínica" />
+            <label class="rc-label" for="clinic">Clínica</label>
+            <input id="clinic" formControlName="clinic" class="rc-input" placeholder="Nome do local" />
           </div>
         </div>
         <div class="rc-field">
-          <label class="rc-label">Custo (R$)</label>
-          <input formControlName="cost" type="number" class="rc-input" placeholder="0.00" />
+          <label class="rc-label" for="cost">Custo (R$)</label>
+          <input id="cost" formControlName="cost" type="number" step="0.01" class="rc-input" placeholder="0,00" />
         </div>
-      </div>
+      </fieldset>
 
-      <div class="rc-section">
-        <p class="rc-section-label">Medicação (opcional)</p>
+      <fieldset class="rc-section">
+        <legend class="rc-section-label">Medicação <span class="fw-normal text-muted">(opcional)</span></legend>
         <div class="rc-grid-2">
           <div class="rc-field">
-            <label class="rc-label">Dosagem</label>
-            <input formControlName="dosage" class="rc-input" placeholder="Ex: 10mg" />
+            <label class="rc-label" for="dosage">Dosagem</label>
+            <input id="dosage" formControlName="dosage" class="rc-input" placeholder="Ex: 10mg" />
           </div>
           <div class="rc-field">
-            <label class="rc-label">Número do lote</label>
-            <input formControlName="batchNumber" class="rc-input" placeholder="Ex: LOTE-2024-X1" />
+            <label class="rc-label" for="batchNumber">Número do lote</label>
+            <input id="batchNumber" formControlName="batchNumber" class="rc-input" placeholder="Ex: LOTE-2024-X1" />
           </div>
         </div>
-      </div>
+      </fieldset>
 
       <button type="submit" class="rc-btn" [disabled]="form.invalid || isLoading()">
-        @if (isLoading()) { Salvando... } @else { Salvar registro }
+        @if (isLoading()) { 
+          <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span> Salvando... 
+        } @else { 
+          Salvar registro 
+        }
       </button>
 
     </form>
   </div>
-</div>
+</main>

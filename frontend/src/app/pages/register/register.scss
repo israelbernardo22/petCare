@@ -1,0 +1,166 @@
+$color-title: #2C3558;       
+$color-text: #6B728E;        
+$color-primary: #20A68A;     
+$color-primary-hover: #178870; 
+$color-error-bg: #FDF0F1;
+$color-error-text: #C92A3F;
+$bg-gradient: linear-gradient(135deg, #F0F4F3 0%, #E4E8E9 100%);
+
+
+.rg-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $bg-gradient;
+  font-family: var(--font-main, 'Poppins', sans-serif);
+  padding: 2rem 1rem; 
+}
+
+
+.rg-card {
+  background-color: #FFFFFF;
+  width: 100%;
+  max-width: 480px;
+  padding: 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 12px 40px rgba(44, 53, 88, 0.08);
+}
+
+.rg-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+
+  .rg-paw {
+    font-size: 2.5rem;
+    color: $color-primary;
+  }
+
+  .rg-brand-name {
+    color: $color-primary;
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+
+  .rg-brand-sub {
+    color: $color-title;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+.rg-tagline {
+  color: $color-text;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.rg-error {
+  background-color: $color-error-bg;
+  color: $color-error-text;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.rg-field {
+  margin-bottom: 1.25rem;
+
+  .rg-label {
+    display: block;
+    color: $color-title;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .rg-input {
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    border: 1.5px solid #E2E6EA;
+    border-radius: 50px; 
+    color: $color-title;
+    font-size: 0.95rem;
+    transition: all 0.2s ease-in-out;
+    outline: none; 
+
+    &::placeholder {
+      color: #AAB2BD;
+    }
+
+    &:focus {
+      border-color: $color-primary;
+      box-shadow: 0 0 0 4px rgba(32, 166, 138, 0.15);
+    }
+    
+    &.ng-invalid.ng-touched {
+      border-color: $color-error-text;
+      &:focus {
+        box-shadow: 0 0 0 4px rgba(201, 42, 63, 0.15);
+      }
+    }
+  }
+}
+.rg-btn {
+  width: 100%;
+  background-color: $color-primary;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.85rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background-color: $color-primary-hover;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(32, 166, 138, 0.25);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    background-color: #94D3C6;
+    cursor: not-allowed;
+  }
+}
+
+.rg-footer {
+  text-align: center;
+  color: $color-text;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+  margin-bottom: 0;
+
+  a {
+    color: $color-primary;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-primary-hover;
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .rg-card {
+    padding: 2rem 1.5rem;
+  }
+}
