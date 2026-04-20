@@ -1,0 +1,202 @@
+// --- Variáveis Globais do PetCare ---
+$color-title: #2C3558;       
+$color-text: #6B728E;        
+$color-primary: #20A68A;     
+$color-primary-hover: #178870; 
+$color-bg-avatar: #E8F3F1;
+
+main.container {
+  font-family: var(--font-main, 'Poppins', sans-serif);
+}
+
+// --- Card de "Adicionar Amigo" ---
+.action-card {
+  background: linear-gradient(135deg, $color-primary 0%, #178870 100%);
+  border-radius: 24px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(32, 166, 138, 0.3) !important;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 4px rgba(32, 166, 138, 0.4) !important;
+  }
+
+  i { color: #FFFFFF; }
+}
+
+// --- Cards dos Pets ---
+.pet-card {
+  border-radius: 24px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(44, 53, 88, 0.06) !important;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(44, 53, 88, 0.12) !important;
+    border-color: rgba(32, 166, 138, 0.1) !important;
+  }
+
+  .text-primary-color {
+    color: $color-title;
+  }
+
+  // Cabeçalho Flutuante (Badge e Botões)
+  .pet-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+
+  // Badges de Gênero
+  .pet-badge {
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .badge-male { background-color: #E3F2FD; color: #1976D2; }
+  .badge-female { background-color: #FFEBEE; color: #D32F2F; }
+  .badge-unknown { background-color: #F5F5F5; color: #616161; }
+
+  // Botões de Ação (Editar/Excluir)
+  .pet-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .btn-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    border: 1px solid #E2E6EA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+
+    i { font-size: 0.85rem; }
+
+    &:hover {
+      background-color: #F8F9FA;
+      transform: scale(1.1);
+    }
+  }
+
+  // Avatar (Emoji)
+  .avatar-emoji {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background-color: $color-bg-avatar;
+    border-radius: 50%;
+    font-size: 2.5rem;
+    margin: 1.5rem auto 1rem; // Empurra para baixo para não bater no header absolute
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
+  }
+
+  // Divisor de seção
+  .pet-divider {
+    border-top: 1px solid #EAECEF;
+    opacity: 1;
+    margin: 0.5rem 0 1rem 0;
+  }
+
+  // Mini-Grid de Detalhes
+  .pet-details {
+    flex-grow: 1; // Empurra os botões principais para o rodapé
+    
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      padding: 0.25rem 0;
+    }
+
+    .detail-label {
+      color: #AAB2BD;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .detail-value {
+      color: $color-title;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+
+      i {
+        color: $color-primary;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  // Caixa de Observações (Notas)
+  .pet-notes {
+    background-color: #F8F9FA;
+    border-radius: 12px;
+    padding: 0.75rem;
+    margin-top: 0.75rem;
+    border: 1px solid #EAECEF;
+
+    .notes-text {
+      color: $color-text;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; // Limita a 2 linhas
+      -webkit-box-orient: vertical;  
+      overflow: hidden;
+    }
+  }
+
+  // Botões do Rodapé
+  .btn-primary {
+    background-color: $color-primary;
+    border: none;
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: $color-primary-hover;
+      transform: scale(1.02);
+    }
+  }
+
+  .btn-outline-primary {
+    color: $color-primary;
+    border-color: $color-primary;
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: $color-primary;
+      color: #FFFFFF;
+    }
+  }
+}

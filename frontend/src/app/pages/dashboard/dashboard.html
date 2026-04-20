@@ -1,77 +1,109 @@
 <app-navbar></app-navbar>
 
-<div class="container py-5">
+<main class="container py-5">
   
-  <div class="text-center mb-5">
+  <header class="text-center mb-5">
     <h2 class="fw-bold mb-1">Olá, {{ userName() }}!</h2>
-    <p class="text-muted">Bem vindo (a) ao PetCare.</p>
-  </div>
+    <p class="text-muted">Bem-vindo(a) ao PetCare.</p>
+  </header>
 
-  <div class="row justify-content-center g-4 mb-5">
-    <div class="col-12 col-md-5 col-lg-4" (click)="navigateToAddPet()">
-      <div class="card action-card p-4 text-white shadow-sm h-100 border-0" style="cursor: pointer;">
+  <section class="row justify-content-center g-4 mb-5">
+    <div class="col-12 col-md-5 col-lg-4">
+      <div class="card action-card p-4 text-white shadow-sm h-100 border-0" 
+           (click)="navigateToAddPet()" 
+           role="button" 
+           tabindex="0" 
+           (keydown.enter)="navigateToAddPet()">
         <div class="text-center">
-          <i class="bi bi-plus-circle-fill fs-1 mb-2"></i>
+          <i class="bi bi-plus-circle-fill fs-1 mb-2" aria-hidden="true"></i>
           <h4 class="fw-bold mb-0">Adicionar Amigo</h4>
           <p class="mb-0 opacity-75 small">Cadastre um novo pet</p>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
+  <section class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
     @for (pet of pets(); track pet.id) {
-      <div class="col d-flex justify-content-center">
-        <div class="card pet-card position-relative shadow-sm border-0 w-100" style="max-width: 300px;">
-          
-          <span class="badge position-absolute top-0 start-0 m-3" 
-                [ngClass]="{'bg-info': pet.gender === 'MALE', 'bg-danger': pet.gender === 'FEMALE', 'bg-secondary': pet.gender === 'UNKNOWN'}">
-            {{ pet.gender === 'MALE' ? 'Macho' : pet.gender === 'FEMALE' ? 'Fêmea' : 'N/I' }}
-          </span>
-          <button 
-            class="btn btn-sm btn-light border position-absolute top-0 end-0 m-3" 
-            style="z-index: 2;"
-            (click)="navigateToEditPet(pet.id)">
-            <i class="bi bi-pencil-fill text-primary"></i>
-          </button>
-          <button 
-            class="btn btn-sm btn-light border position-absolute top-0 end-0 m-3" 
-            style="transform: translateX(-40px); z-index: 2;"
-            (click)="deletePet(pet.id)">
-            <i class="bi bi-trash-fill text-danger"></i>
-          </button>
-          <div class="card-body p-4 text-center">
-         <div class="avatar-emoji mb-3">
-            {{ getSpeciesEmoji(pet.species) }}
-        </div>
-            
-            <h5 class="fw-bold mb-1 text-primary-color">{{ pet.name }}</h5>
-            <p class="text-muted small mb-3">{{ pet.breed || 'Sem raça definida' }}</p>
-            
-            <div class="d-flex justify-content-center gap-2 mb-4">
-              @if (pet.weight) {
-                <span class="badge bg-light text-dark border fw-normal">{{ pet.weight }}kg</span>
-              }
-              @if (pet.microchip) {
-                <span class="badge bg-light text-dark border fw-normal"><i class="bi bi-cpu"></i></span>
-              }
-            </div>
-            
-            <div class="d-grid gap-2">
-              <button class="btn btn-primary btn-sm fw-bold shadow-sm" (click)="navigateToRegisterCare(pet.id)">
-                Registrar Cuidado
-              </button>
-              <button class="btn btn-outline-primary btn-sm fw-bold" (click)="viewHistory(pet.id)">
-                Ver Histórico
-              </button>
-            </div>
-          </div>
-        </div>
+      <article class="col d-flex justify-content-center">
+  <div class="card pet-card shadow-sm border-0 w-100 h-100">
+    
+    <div class="pet-card-header">
+      <span class="badge pet-badge" 
+            [ngClass]="{'badge-male': pet.gender === 'MALE', 'badge-female': pet.gender === 'FEMALE', 'badge-unknown': pet.gender === 'UNKNOWN'}">
+        {{ pet.gender === 'MALE' ? 'Macho' : pet.gender === 'FEMALE' ? 'Fêmea' : 'N/I' }}
+      </span>
+      
+      <div class="pet-actions">
+        <button class="btn btn-icon text-primary" (click)="navigateToEditPet(pet.id)" aria-label="Editar" title="Editar">
+          <i class="bi bi-pencil-fill"></i>
+        </button>
+        <button class="btn btn-icon text-danger" (click)="deletePet(pet.id)" aria-label="Excluir" title="Excluir">
+          <i class="bi bi-trash-fill"></i>
+        </button>
       </div>
+    </div>
+
+    <div class="card-body p-4 text-center d-flex flex-column">
+      
+      <div class="avatar-emoji mb-3" aria-hidden="true">
+        {{ getSpeciesEmoji(pet.species) }}
+      </div>
+      
+      <h5 class="fw-bold mb-1 text-primary-color">{{ pet.name }}</h5>
+      <p class="text-muted small mb-3">{{ pet.breed || 'Sem raça definida' }}</p>
+      
+      <hr class="pet-divider">
+
+      <div class="pet-details text-start mb-3">
+        <div class="row g-2">
+          
+          <div class="col-6 detail-item">
+            <span class="detail-label">Nascimento</span>
+            <span class="detail-value"><i class="bi bi-calendar3"></i> {{ pet.birthDate || 'N/I' }}</span>
+          </div>
+          
+          <div class="col-6 detail-item">
+            <span class="detail-label">Cor</span>
+            <span class="detail-value"><i class="bi bi-palette"></i> {{ pet.color || 'N/I' }}</span>
+          </div>
+          
+          <div class="col-6 detail-item">
+            <span class="detail-label">Peso</span>
+            <span class="detail-value"><i class="bi bi-speedometer2"></i> {{ pet.weight ? pet.weight + ' kg' : 'N/I' }}</span>
+          </div>
+          
+          <div class="col-6 detail-item">
+            <span class="detail-label">Microchip</span>
+            <span class="detail-value"><i class="bi bi-cpu"></i> {{ pet.microchip || 'Não possui' }}</span>
+          </div>
+
+        </div>
+
+        @if (pet.notes) {
+          <div class="pet-notes mt-2" [title]="pet.notes">
+            <span class="detail-label mb-1"><i class="bi bi-journal-text"></i> Observações</span>
+            <p class="notes-text mb-0">{{ pet.notes }}</p>
+          </div>
+        }
+      </div>
+      
+      <div class="d-grid gap-2 mt-auto">
+        <button class="btn btn-primary btn-sm fw-bold shadow-sm" (click)="navigateToRegisterCare(pet.id)">
+          Registrar Cuidado
+        </button>
+        <button class="btn btn-outline-primary btn-sm fw-bold" (click)="viewHistory(pet.id)">
+          Ver Histórico
+        </button>
+      </div>
+
+    </div>
+  </div>
+</article>
     } @empty {
       <div class="col-12 text-center py-5">
-        <p class="text-muted">Nenhum pet encontrado.</p>
+        <p class="text-muted">Nenhum pet encontrado. Adicione seu primeiro amigo!</p>
       </div>
     }
-  </div>
-</div>
+  </section>
+</main>

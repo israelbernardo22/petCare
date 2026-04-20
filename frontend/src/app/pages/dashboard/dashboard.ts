@@ -10,7 +10,7 @@ import { Navbar } from '../navbar/navbar';
   standalone: true,
   imports: [CommonModule, RouterModule, Navbar],
   templateUrl: './dashboard.html',
-  styleUrls: ['./dashboard.css']
+  styleUrls: ['./dashboard.scss']
 })
 
 

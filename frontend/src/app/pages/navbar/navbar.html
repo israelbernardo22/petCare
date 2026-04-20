@@ -1,12 +1,18 @@
 <nav class="nb-nav">
   <div class="nb-inner">
-    <a class="nb-brand" routerLink="/dashboard">
-      <div class="nb-paw">🐾</div>
+    <a class="nb-brand" routerLink="/dashboard" aria-label="Ir para o painel principal" title="PetCare Home">
+      <div class="nb-paw" aria-hidden="true">🐾</div>
       <span class="nb-brand-name">PetCare</span>
     </a>
+    
     <div class="nb-right">
-       <button class="nb-link" (click)="editar()">Meu Perfil</button>
-      <button class="nb-profile" (click)="logout()">Sair</button>
+      <button class="nb-link" (click)="editar()">
+        <i class="bi bi-person-circle me-2" aria-hidden="true"></i> Meu Perfil
+      </button>
+      
+      <button class="nb-profile nb-logout" (click)="logout()">
+        Sair <i class="bi bi-box-arrow-right ms-1" aria-hidden="true"></i>
+      </button>
     </div>
   </div>
 </nav>

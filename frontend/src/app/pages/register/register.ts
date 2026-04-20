@@ -9,7 +9,7 @@ import { ApiService } from '../../services/api.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './register.html',
-  styleUrls: ['./register.css']
+  styleUrls: ['./register.scss']
 })
 export class Register {
   private fb = inject(FormBuilder);

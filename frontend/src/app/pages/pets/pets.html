@@ -1,32 +1,40 @@
 <app-navbar></app-navbar>
 
-<div class="pf-page">
+<main class="pf-page">
   <div class="pf-content">
 
-    <div class="pf-header">
-      <button class="pf-back" (click)="goBack()">← Voltar</button>
-      <h2 class="pf-title">{{ isEdit() ? 'Editar pet' : 'Novo pet' }}</h2>
-    </div>
+    <header class="pf-header">
+      <button class="pf-back" (click)="goBack()" aria-label="Voltar para a página anterior">
+        <i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar
+      </button>
+      <h2 class="pf-title">{{ isEdit() ? 'Editar Pet' : 'Novo Pet' }}</h2>
+    </header>
 
     @if (success()) {
-      <div class="pf-success">✅ Pet salvo com sucesso! Redirecionando...</div>
+      <div class="pf-alert pf-success" role="alert">
+        <i class="bi bi-check-circle-fill" aria-hidden="true"></i> Pet salvo com sucesso! Redirecionando...
+      </div>
     }
+    
     @if (errorMsg()) {
-      <div class="pf-error">{{ errorMsg() }}</div>
+      <div class="pf-alert pf-error" role="alert">
+        <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i> {{ errorMsg() }}
+      </div>
     }
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-      <div class="pf-section">
-        <p class="pf-section-label">Informações básicas</p>
+      <fieldset class="pf-section">
+        <legend class="pf-section-label">Informações básicas</legend>
+        
         <div class="pf-grid-2">
           <div class="pf-field">
-            <label class="pf-label">Nome *</label>
-            <input formControlName="name" class="pf-input" placeholder="Nome do pet" />
+            <label class="pf-label" for="name">Nome *</label>
+            <input id="name" formControlName="name" class="pf-input" placeholder="Nome do pet" />
           </div>
           <div class="pf-field">
-            <label class="pf-label">Espécie *</label>
-            <select formControlName="species" class="pf-input">
+            <label class="pf-label" for="species">Espécie *</label>
+            <select id="species" formControlName="species" class="pf-input">
               <option value="">Selecione...</option>
               @for (s of species; track s) {
                 <option [value]="s">{{ speciesLabels[s] }}</option>
@@ -34,58 +42,65 @@
             </select>
           </div>
         </div>
+        
         <div class="pf-grid-2">
           <div class="pf-field">
-            <label class="pf-label">Raça</label>
-            <input formControlName="breed" class="pf-input" placeholder="Ex: Golden Retriever" />
+            <label class="pf-label" for="breed">Raça</label>
+            <input id="breed" formControlName="breed" class="pf-input" placeholder="Ex: Golden Retriever" />
           </div>
           <div class="pf-field">
-            <label class="pf-label">Gênero</label>
-            <select formControlName="gender" class="pf-input">
+            <label class="pf-label" for="gender">Gênero</label>
+            <select id="gender" formControlName="gender" class="pf-input">
               <option value="UNKNOWN">Não informado</option>
               <option value="MALE">Macho</option>
               <option value="FEMALE">Fêmea</option>
             </select>
           </div>
         </div>
-      </div>
+      </fieldset>
 
-      <div class="pf-section">
-        <p class="pf-section-label">Detalhes físicos</p>
+      <fieldset class="pf-section">
+        <legend class="pf-section-label">Detalhes físicos</legend>
+        
         <div class="pf-grid-2">
           <div class="pf-field">
-            <label class="pf-label">Data de nascimento</label>
-            <input formControlName="birthDate" type="date" class="pf-input" />
+            <label class="pf-label" for="birthDate">Data de nascimento</label>
+            <input id="birthDate" formControlName="birthDate" type="date" class="pf-input" />
           </div>
           <div class="pf-field">
-            <label class="pf-label">Peso (kg)</label>
-            <input formControlName="weight" type="number" class="pf-input" placeholder="Ex: 12.5" />
+            <label class="pf-label" for="weight">Peso (kg)</label>
+            <input id="weight" formControlName="weight" type="number" step="0.1" class="pf-input" placeholder="Ex: 12.5" />
           </div>
         </div>
+        
         <div class="pf-grid-2">
           <div class="pf-field">
-            <label class="pf-label">Cor</label>
-            <input formControlName="color" class="pf-input" placeholder="Ex: Caramelo" />
+            <label class="pf-label" for="color">Cor</label>
+            <input id="color" formControlName="color" class="pf-input" placeholder="Ex: Caramelo" />
           </div>
           <div class="pf-field">
-            <label class="pf-label">Microchip</label>
-            <input formControlName="microchip" class="pf-input" placeholder="Número do chip" />
+            <label class="pf-label" for="microchip">Microchip</label>
+            <input id="microchip" formControlName="microchip" class="pf-input" placeholder="Número do chip" />
           </div>
         </div>
-      </div>
+      </fieldset>
 
-      <div class="pf-section">
-        <p class="pf-section-label">Observações</p>
+      <fieldset class="pf-section">
+        <legend class="pf-section-label">Observações</legend>
         <div class="pf-field">
-          <label class="pf-label">Notas</label>
-          <textarea formControlName="notes" class="pf-input pf-textarea" placeholder="Alergias, comportamento, observações gerais..."></textarea>
+          <label class="pf-label" for="notes">Notas</label>
+          <textarea id="notes" formControlName="notes" class="pf-input pf-textarea" placeholder="Alergias, comportamento, observações gerais..."></textarea>
         </div>
-      </div>
+      </fieldset>
 
       <button type="submit" class="pf-btn" [disabled]="form.invalid || isLoading()">
-        @if (isLoading()) { Salvando... } @else { {{ isEdit() ? 'Salvar alterações' : 'Cadastrar pet' }} }
+        @if (isLoading()) { 
+          <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span> Salvando... 
+        } @else { 
+          {{ isEdit() ? 'Salvar alterações' : 'Cadastrar pet' }} 
+        }
       </button>
 
     </form>
   </div>
-</div>
+</main>

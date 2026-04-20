@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: var(--font-main, 'Poppins', sans-serif);
+  background: linear-gradient(
+    90deg, 
+    #00CBA9 0%,       
+    #E8F9F7 15%,     
+    #E8F9F7 85%,      
+    #00CBA9 100%      
+  );
+  
+  background-attachment: fixed;
+}
