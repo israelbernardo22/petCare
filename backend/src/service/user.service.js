@@ -1,11 +1,11 @@
-const prisma = require('../prisma/client');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const prisma = require("../prisma/client");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 async function login(email, password) {
   try {
     const user = await prisma.user.findUnique({
-      where: { email }
+      where: { email },
     });
 
     if (!user) {
@@ -18,13 +18,16 @@ async function login(email, password) {
       throw new Error("E-mail ou senha inválidos.");
     }
 
-    const token = jwt.sign({ id: user.id, email: user.email, name: user.name }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign(
+      { id: user.id, email: user.email, name: user.name },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" },
+    );
 
     return { token, user: { id: user.id, email: user.email, name: user.name } };
-
   } catch (error) {
-    console.error("ERRO REAL NO LOGIN:", error.message); 
-    throw error; 
+    console.error("ERRO REAL NO LOGIN:", error.message);
+    throw error;
   }
 }
 
@@ -35,14 +38,13 @@ async function register(userData) {
     const user = await prisma.user.create({
       data: {
         ...userData,
-        password: hashedPassword
-      }
+        password: hashedPassword,
+      },
     });
 
     return user;
-
   } catch (error) {
-    if (error.code === 'P2002') {
+    if (error.code === "P2002") {
       throw new Error("Este e-mail já está cadastrado.");
     }
     throw error;
@@ -52,7 +54,7 @@ async function register(userData) {
 async function getUserById(id) {
   return prisma.user.findUnique({
     where: { id },
-    select: { id: true, name: true, email: true, phone: true, avatarUrl: true }
+    select: { id: true, name: true, email: true, phone: true, avatarUrl: true },
   });
 }
 
@@ -63,7 +65,7 @@ async function updateUser(id, data) {
   return prisma.user.update({
     where: { id },
     data,
-    select: { id: true, name: true, email: true, phone: true, avatarUrl: true }
+    select: { id: true, name: true, email: true, phone: true, avatarUrl: true },
   });
 }
 

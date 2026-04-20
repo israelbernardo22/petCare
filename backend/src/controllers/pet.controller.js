@@ -1,4 +1,4 @@
-const service = require('../service/pet.service');
+const service = require("../service/pet.service");
 
 async function create(req, res) {
   try {
@@ -8,14 +8,14 @@ async function create(req, res) {
   } catch (e) {
     console.error("ERRO AO CRIAR PET:", e);
 
-    if (e.code === 'P2002') {
+    if (e.code === "P2002") {
       return res.status(409).json({
-        message: 'Já existe um pet com esse microchip'
+        message: "Já existe um pet com esse microchip",
       });
     }
 
     res.status(500).json({
-      message: 'Erro ao criar pet'
+      message: "Erro ao criar pet",
     });
   }
 }

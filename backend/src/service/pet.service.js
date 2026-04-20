@@ -1,4 +1,4 @@
-const prisma = require('../prisma/client');
+const prisma = require("../prisma/client");
 
 async function createPet(data) {
   return prisma.pet.create({ data });
@@ -6,7 +6,7 @@ async function createPet(data) {
 
 async function listPetsByUser(userId) {
   return prisma.pet.findMany({
-    where: { userId }
+    where: { userId },
   });
 }
 async function getPetById(id) {
@@ -17,9 +17,14 @@ async function updatePet(id, data) {
   return prisma.pet.update({ where: { id }, data });
 }
 
-async function deletePet(id) 
-{
+async function deletePet(id) {
   return prisma.pet.delete({ where: { id } });
 }
 
-module.exports = { createPet, listPetsByUser, getPetById, updatePet, deletePet };
+module.exports = {
+  createPet,
+  listPetsByUser,
+  getPetById,
+  updatePet,
+  deletePet,
+};

@@ -1,11 +1,11 @@
-const prisma = require('../prisma/client');
+const prisma = require("../prisma/client");
 
 async function createCare(data) {
   return prisma.careRecord.create({ data });
 }
 
 async function getCareById(id, petid) {
-  return prisma.careRecord.findUnique({ where: {petId: petid, id: id } });
+  return prisma.careRecord.findUnique({ where: { petId: petid, id: id } });
 }
 
 async function updateCare(id, data) {
@@ -19,19 +19,25 @@ async function getHistory(petId, filters) {
       type: filters.type,
       performedAt: {
         gte: filters.startDate ? new Date(filters.startDate) : undefined,
-        lte: filters.endDate ? new Date(filters.endDate) : undefined
-      }
+        lte: filters.endDate ? new Date(filters.endDate) : undefined,
+      },
     },
     orderBy: {
-      performedAt: 'desc'
-    }
+      performedAt: "desc",
+    },
   });
 }
 
 async function deleteRecord(id) {
   return prisma.careRecord.delete({
-    where: { id }
+    where: { id },
   });
 }
 
-module.exports = { createCare, getHistory, getCareById, updateCare, deleteRecord };
+module.exports = {
+  createCare,
+  getHistory,
+  getCareById,
+  updateCare,
+  deleteRecord,
+};

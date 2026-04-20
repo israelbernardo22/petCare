@@ -2,7 +2,6 @@
 
 <main class="pf-page">
   <div class="pf-content">
-
     <header class="pf-header">
       <button class="pf-back" (click)="goBack()" aria-label="Voltar para a página anterior">
         <i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar
@@ -15,7 +14,7 @@
         <i class="bi bi-check-circle-fill" aria-hidden="true"></i> Pet salvo com sucesso! Redirecionando...
       </div>
     }
-    
+
     @if (errorMsg()) {
       <div class="pf-alert pf-error" role="alert">
         <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i> {{ errorMsg() }}
@@ -23,10 +22,9 @@
     }
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
       <fieldset class="pf-section">
         <legend class="pf-section-label">Informações básicas</legend>
-        
+
         <div class="pf-grid-2">
           <div class="pf-field">
             <label class="pf-label" for="name">Nome *</label>
@@ -42,7 +40,7 @@
             </select>
           </div>
         </div>
-        
+
         <div class="pf-grid-2">
           <div class="pf-field">
             <label class="pf-label" for="breed">Raça</label>
@@ -61,7 +59,7 @@
 
       <fieldset class="pf-section">
         <legend class="pf-section-label">Detalhes físicos</legend>
-        
+
         <div class="pf-grid-2">
           <div class="pf-field">
             <label class="pf-label" for="birthDate">Data de nascimento</label>
@@ -69,10 +67,17 @@
           </div>
           <div class="pf-field">
             <label class="pf-label" for="weight">Peso (kg)</label>
-            <input id="weight" formControlName="weight" type="number" step="0.1" class="pf-input" placeholder="Ex: 12.5" />
+            <input
+              id="weight"
+              formControlName="weight"
+              type="number"
+              step="0.1"
+              class="pf-input"
+              placeholder="Ex: 12.5"
+            />
           </div>
         </div>
-        
+
         <div class="pf-grid-2">
           <div class="pf-field">
             <label class="pf-label" for="color">Cor</label>
@@ -89,20 +94,20 @@
         <legend class="pf-section-label">Observações</legend>
         <div class="pf-field">
           <label class="pf-label" for="notes">Notas</label>
-          <textarea id="notes" formControlName="notes" class="pf-input pf-textarea" placeholder="Alergias, comportamento, observações gerais..."></textarea>
+          <textarea
+            id="notes"
+            formControlName="notes"
+            class="pf-input pf-textarea"
+            placeholder="Alergias, comportamento, observações gerais..."
+          ></textarea>
         </div>
       </fieldset>
 
-    <button type="submit" class="pf-btn" [disabled]="form.invalid || isLoading()">
+      <button type="submit" class="pf-btn" [disabled]="form.invalid || isLoading()">
+        <span *ngIf="isLoading()" class="spinner-border spinner-border-sm me-2"></span>
 
-  <span *ngIf="isLoading()" class="spinner-border spinner-border-sm me-2"></span>
-
-  {{ isLoading() 
-      ? 'Salvando...' 
-      : (isEdit() ? 'Salvar alterações' : 'Cadastrar pet') }}
-
-</button>
-
+        {{ isLoading() ? 'Salvando...' : isEdit() ? 'Salvar alterações' : 'Cadastrar pet' }}
+      </button>
     </form>
   </div>
 </main>

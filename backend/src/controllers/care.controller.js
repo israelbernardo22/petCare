@@ -1,4 +1,4 @@
-const service = require('../service/care.service');
+const service = require("../service/care.service");
 
 async function create(req, res) {
   const care = await service.createCare(req.body);
@@ -6,13 +6,9 @@ async function create(req, res) {
 }
 
 async function history(req, res) {
-  const data = await service.getHistory(
-    req.params.petId,
-    req.query
-  );
+  const data = await service.getHistory(req.params.petId, req.query);
   res.json(data);
 }
-
 
 async function getById(req, res) {
   try {
@@ -25,7 +21,7 @@ async function getById(req, res) {
 
 async function update(req, res) {
   try {
-    const care = await service.updateCare( req.params.id, req.body);
+    const care = await service.updateCare(req.params.id, req.body);
     res.json(care);
   } catch (e) {
     res.status(400).json({ error: e.message });
