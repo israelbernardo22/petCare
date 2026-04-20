@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+
+<div class="ep-page">
+  <div class="ep-content">
+
+    <div class="ep-header">
+      <button class="ep-back" (click)="goBack()">← Voltar</button>
+      <h2 class="ep-title">Editar perfil</h2>
+    </div>
+
+    @if (success()) {
+      <div class="ep-success">✅ Perfil atualizado! Redirecionando...</div>
+    }
+    @if (errorMsg()) {
+      <div class="ep-error">{{ errorMsg() }}</div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div class="ep-section">
+        <p class="ep-section-label">Informações pessoais</p>
+        <div class="ep-field">
+          <label class="ep-label">Nome *</label>
+          <input formControlName="name" class="ep-input" placeholder="Seu nome completo" />
+        </div>
+        <div class="ep-field">
+          <label class="ep-label">E-mail *</label>
+          <input formControlName="email" type="email" class="ep-input" placeholder="seu@email.com" />
+        </div>
+        <div class="ep-field">
+          <label class="ep-label">Telefone</label>
+          <input formControlName="phone" class="ep-input" placeholder="(31) 99999-9999" />
+        </div>
+      </div>
+
+      <div class="ep-section">
+        <p class="ep-section-label">Alterar senha (opcional)</p>
+        <div class="ep-field">
+          <label class="ep-label">Nova senha</label>
+          <input formControlName="password" type="password" class="ep-input" placeholder="Deixe vazio para não alterar" />
+        </div>
+        <div class="ep-field">
+          <label class="ep-label">Confirmar nova senha</label>
+          <input formControlName="confirmPassword" type="password" class="ep-input" placeholder="Repita a nova senha" />
+        </div>
+      </div>
+
+      <button type="submit" class="ep-btn" [disabled]="form.invalid || isLoading()">
+        @if (isLoading()) { Salvando... } @else { Salvar alterações }
+      </button>
+
+    </form>
+  </div>
+</div>

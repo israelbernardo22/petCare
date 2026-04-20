@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  name      String   @db.VarChar(100)
+  email     String   @unique @db.VarChar(150)
+  password  String   @db.VarChar(255)
+  phone     String?  @db.VarChar(20)
+  avatarUrl String?  @db.VarChar(500)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  pets      Pet[]
+
+  @@map("users")
+}
+
+model Pet {
+  id          Int         @id @default(autoincrement())
+  name        String       @db.VarChar(100)
+  species     Species
+  breed       String?      @db.VarChar(100)
+  gender      PetGender    @default(UNKNOWN)
+  birthDate   DateTime?    @db.Date
+  weight      Decimal?     @db.Decimal(5, 2)
+  color       String?      @db.VarChar(50)
+  microchip   String?      @unique @db.VarChar(50)
+  photoUrl    String?      @db.VarChar(500)
+  notes       String?      @db.Text
+  isActive    Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  userId      String
+  careRecords CareRecord[]
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([species])
+  @@map("pets")
+}
+
+model CareRecord {
+  id              Int      @id     @default(autoincrement())
+  type          CareType
+  title         String    @db.VarChar(200)
+  description   String?   @db.Text
+  performedAt   DateTime
+  nextDueAt     DateTime?
+  veterinarian  String?   @db.VarChar(100)
+  clinic        String?   @db.VarChar(150)
+  cost          Decimal?  @db.Decimal(8, 2)
+  attachmentUrl String?   @db.VarChar(500)
+  batchNumber   String?   @db.VarChar(50)
+  dosage        String?   @db.VarChar(100)
+  isCompleted   Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  petId         String
+  pet           Pet       @relation(fields: [petId], references: [id], onDelete: Cascade)
+
+  @@index([petId])
+  @@index([type])
+  @@index([performedAt])
+  @@index([petId, type])
+  @@index([petId, performedAt])
+  @@index([nextDueAt])
+  @@map("care_records")
+}
+
+enum CareType {
+  VACCINE
+  CONSULTATION
+  MEDICATION
+  EXAM
+  SURGERY
+  GROOMING
+  OTHER
+}
+
+enum Species {
+  DOG
+  CAT
+  BIRD
+  RABBIT
+  FISH
+  REPTILE
+  OTHER
+}
+
+enum PetGender {
+  MALE
+  FEMALE
+  UNKNOWN
+}

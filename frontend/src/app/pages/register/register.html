@@ -1,0 +1,47 @@
+<div class="rg-wrap">
+  <div class="rg-card">
+
+    <div class="rg-brand">
+      <div class="rg-paw">🐾</div>
+      <div>
+        <h1 class="rg-brand-name">PetCare</h1>
+        <p class="rg-brand-sub">Crie sua conta gratuita</p>
+      </div>
+    </div>
+
+    <p class="rg-tagline">Cadastre-se para cuidar melhor dos seus pets.</p>
+
+    @if (errorMessage()) {
+      <div class="rg-error">{{ errorMessage() }}</div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="rg-field">
+        <label class="rg-label">Nome completo *</label>
+        <input formControlName="name" class="rg-input" placeholder="Seu nome" />
+      </div>
+      <div class="rg-field">
+        <label class="rg-label">E-mail *</label>
+        <input formControlName="email" type="email" class="rg-input" placeholder="seu@email.com" />
+      </div>
+      <div class="rg-field">
+        <label class="rg-label">Telefone</label>
+        <input formControlName="phone" class="rg-input" placeholder="(31) 99999-9999" />
+      </div>
+      <div class="rg-field">
+        <label class="rg-label">Senha *</label>
+        <input formControlName="password" type="password" class="rg-input" placeholder="Mínimo 6 caracteres" />
+      </div>
+      <div class="rg-field">
+        <label class="rg-label">Confirmar senha *</label>
+        <input formControlName="confirmPassword" type="password" class="rg-input" placeholder="Repita a senha" />
+      </div>
+
+      <button type="submit" class="rg-btn" [disabled]="form.invalid || loading()">
+        @if (loading()) { Criando conta... } @else { Criar conta }
+      </button>
+    </form>
+
+    <p class="rg-footer">Já tem uma conta? <a routerLink="/">Entrar</a></p>
+  </div>
+</div>

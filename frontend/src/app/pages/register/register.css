@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500&display=swap');
+* { font-family: 'DM Sans', sans-serif; box-sizing: border-box; }
+
+.rg-wrap {
+  min-height: 100vh;
+  background: #f5f7fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+}
+
+.rg-card {
+  background: white;
+  border: 0.5px solid #e8eaf0;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+.rg-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.rg-paw {
+  width: 42px;
+  height: 42px;
+  background: #2563EB;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.rg-brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+  color: #111;
+}
+
+.rg-brand-sub { font-size: 12px; color: #888; margin: 0; }
+
+.rg-tagline {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 0.5px solid #eee;
+}
+
+.rg-error {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 0.5px solid #fca5a5;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 13px;
+  margin-bottom: 1rem;
+}
+
+.rg-field { display: flex; flex-direction: column; margin-bottom: 12px; }
+.rg-label { font-size: 11px; font-weight: 500; color: #888; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 6px; }
+
+.rg-input {
+  height: 44px;
+  border: 0.5px solid #ddd;
+  border-radius: 10px;
+  padding: 0 14px;
+  font-size: 14px;
+  background: #fafafa;
+  color: #111;
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+.rg-input:focus { border-color: #2563EB; background: white; }
+
+.rg-btn {
+  width: 100%;
+  height: 46px;
+  background: #2563EB;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.15s;
+}
+.rg-btn:hover { background: #1d4ed8; }
+.rg-btn:disabled { background: #93c5fd; cursor: not-allowed; }
+
+.rg-footer {
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+  margin-top: 1.25rem;
+  margin-bottom: 0;
+}
+.rg-footer a { color: #2563EB; font-weight: 500; text-decoration: none; }
+.rg-footer a:hover { text-decoration: underline; }
