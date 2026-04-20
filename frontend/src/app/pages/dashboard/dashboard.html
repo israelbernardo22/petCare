@@ -60,7 +60,7 @@
           
           <div class="col-6 detail-item">
             <span class="detail-label">Nascimento</span>
-            <span class="detail-value"><i class="bi bi-calendar3"></i> {{ pet.birthDate || 'N/I' }}</span>
+            <span class="detail-value"><i class="bi bi-calendar3"></i> {{ (pet.birthDate | date:'dd/MM/yyyy':'UTC') || 'N/I' }}</span>
           </div>
           
           <div class="col-6 detail-item">

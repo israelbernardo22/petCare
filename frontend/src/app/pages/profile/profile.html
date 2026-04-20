@@ -1,54 +1,72 @@
 <app-navbar></app-navbar>
 
-<div class="ep-page">
+<main class="ep-page">
   <div class="ep-content">
 
-    <div class="ep-header">
-      <button class="ep-back" (click)="goBack()">← Voltar</button>
-      <h2 class="ep-title">Editar perfil</h2>
-    </div>
+    <header class="ep-header">
+      <button class="ep-back" (click)="goBack()" aria-label="Voltar para a página anterior">
+        <i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar
+      </button>
+      <h2 class="ep-title"><i class="bi bi-person-gear text-primary me-2"></i> Editar Perfil</h2>
+    </header>
 
     @if (success()) {
-      <div class="ep-success">✅ Perfil atualizado! Redirecionando...</div>
+      <div class="ep-alert ep-success" role="alert">
+        <i class="bi bi-check-circle-fill" aria-hidden="true"></i> Perfil atualizado! Redirecionando...
+      </div>
     }
+    
     @if (errorMsg()) {
-      <div class="ep-error">{{ errorMsg() }}</div>
+      <div class="ep-alert ep-error" role="alert">
+        <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i> {{ errorMsg() }}
+      </div>
     }
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-      <div class="ep-section">
-        <p class="ep-section-label">Informações pessoais</p>
+      <fieldset class="ep-section">
+        <legend class="ep-section-label">Informações pessoais</legend>
+        
         <div class="ep-field">
-          <label class="ep-label">Nome *</label>
-          <input formControlName="name" class="ep-input" placeholder="Seu nome completo" />
+          <label class="ep-label" for="name">Nome *</label>
+          <input id="name" formControlName="name" class="ep-input" placeholder="Seu nome completo" />
         </div>
-        <div class="ep-field">
-          <label class="ep-label">E-mail *</label>
-          <input formControlName="email" type="email" class="ep-input" placeholder="seu@email.com" />
+        
+        <div class="ep-grid-2">
+          <div class="ep-field">
+            <label class="ep-label" for="email">E-mail *</label>
+            <input id="email" formControlName="email" type="email" class="ep-input" placeholder="seu@email.com" />
+          </div>
+          <div class="ep-field">
+            <label class="ep-label" for="phone">Telefone</label>
+            <input id="phone" formControlName="phone" class="ep-input" placeholder="(31) 99999-9999" />
+          </div>
         </div>
-        <div class="ep-field">
-          <label class="ep-label">Telefone</label>
-          <input formControlName="phone" class="ep-input" placeholder="(31) 99999-9999" />
-        </div>
-      </div>
+      </fieldset>
 
-      <div class="ep-section">
-        <p class="ep-section-label">Alterar senha (opcional)</p>
-        <div class="ep-field">
-          <label class="ep-label">Nova senha</label>
-          <input formControlName="password" type="password" class="ep-input" placeholder="Deixe vazio para não alterar" />
+      <fieldset class="ep-section">
+        <legend class="ep-section-label">Alterar senha <span class="fw-normal text-muted">(opcional)</span></legend>
+        
+        <div class="ep-grid-2">
+          <div class="ep-field">
+            <label class="ep-label" for="password">Nova senha</label>
+            <input id="password" formControlName="password" type="password" class="ep-input" placeholder="Deixe vazio para manter" />
+          </div>
+          <div class="ep-field">
+            <label class="ep-label" for="confirmPassword">Confirmar nova senha</label>
+            <input id="confirmPassword" formControlName="confirmPassword" type="password" class="ep-input" placeholder="Repita a nova senha" />
+          </div>
         </div>
-        <div class="ep-field">
-          <label class="ep-label">Confirmar nova senha</label>
-          <input formControlName="confirmPassword" type="password" class="ep-input" placeholder="Repita a nova senha" />
-        </div>
-      </div>
+      </fieldset>
 
       <button type="submit" class="ep-btn" [disabled]="form.invalid || isLoading()">
-        @if (isLoading()) { Salvando... } @else { Salvar alterações }
+        @if (isLoading()) { 
+          <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span> Salvando... 
+        } @else { 
+          Salvar alterações 
+        }
       </button>
 
     </form>
   </div>
-</div>
+</main>

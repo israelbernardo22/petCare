@@ -10,7 +10,7 @@ import { Navbar } from '../navbar/navbar';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, Navbar],
   templateUrl: './profile.html',
-  styleUrls: ['./profile.css']
+  styleUrls: ['./profile.scss']
 })
 export class Profile implements OnInit {
   private fb = inject(FormBuilder);

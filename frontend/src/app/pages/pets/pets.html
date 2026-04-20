@@ -93,13 +93,15 @@
         </div>
       </fieldset>
 
-      <button type="submit" class="pf-btn" [disabled]="form.invalid || isLoading()">
-        @if (isLoading()) { 
-          <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span> Salvando... 
-        } @else { 
-          {{ isEdit() ? 'Salvar alterações' : 'Cadastrar pet' }} 
-        }
-      </button>
+    <button type="submit" class="pf-btn" [disabled]="form.invalid || isLoading()">
+
+  <span *ngIf="isLoading()" class="spinner-border spinner-border-sm me-2"></span>
+
+  {{ isLoading() 
+      ? 'Salvando...' 
+      : (isEdit() ? 'Salvar alterações' : 'Cadastrar pet') }}
+
+</button>
 
     </form>
   </div>

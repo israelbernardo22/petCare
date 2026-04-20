@@ -25,13 +25,12 @@
       </div>
 
       <button type="submit" [disabled]="loginForm.invalid || loading" 
-              class="btn btn-primary w-100 rounded-pill py-2 fw-bold shadow-sm">
-        @if (loading) {
-          <span class="spinner-border spinner-border-sm me-2"></span> Entrando...
-        } @else {
-          Entrar
-        }
-      </button>
+        class="btn btn-primary w-100 rounded-pill py-2 fw-bold shadow-sm">
+
+  <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+  {{ loading ? 'Entrando...' : 'Entrar' }}
+
+</button>
     </form>
 
     <div class="text-center mt-4">
