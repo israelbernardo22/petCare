@@ -1,16 +1,16 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 function auth(req, res, next) {
   const token = req.headers.authorization;
 
-  if (!token) return res.status(401).json({ error: 'Sem token' });
+  if (!token) return res.status(401).json({ error: "Sem token" });
 
   try {
-    const decoded = jwt.verify(token, 'segredo');
+    const decoded = jwt.verify(token, "segredo");
     req.userId = decoded.userId;
     next();
   } catch {
-    res.status(401).json({ error: 'Token inválido' });
+    res.status(401).json({ error: "Token inválido" });
   }
 }
 
