@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node app.js)",
+      "Bash(npm start *)",
+      "Bash(Get-ChildItem *)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\ib945\\\\Desktop\\\\petCare\\\\petCare\\\\backend\" -Force | Where-Object { $_.PSIsContainer -or $_.Name -match '\\\\.\\(js|ts|env\\)$|Dockerfile' } | Select-Object Name, PSIsContainer)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\ib945\\\\Desktop\\\\petCare\\\\petCare\\\\frontend\" -Force | Where-Object { $_.PSIsContainer -or $_.Name -match '\\\\.\\(js|ts|json\\)$|Dockerfile' } | Select-Object Name, PSIsContainer)",
+      "Bash(docker --version)",
+      "Bash(docker-compose --version)",
+      "Bash(docker compose up *)",
+      "Bash(npm install *)",
+      "Bash(docker compose ps *)",
+      "Bash(Select-Object FullName)",
+      "Bash(xargs grep -l \"localhost\\\\|apiUrl\\\\|API_URL\\\\|http\")",
+      "Bash(git -C \"C:/Users/ib945/Desktop/petCare/petCare\" status)",
+      "Bash(git -C \"C:/Users/ib945/Desktop/petCare/petCare\" diff)",
+      "Bash(git *)"
+    ]
+  }
+}
