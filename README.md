@@ -1,27 +1,56 @@
-# 🚀 Como executar o projeto
+# PetCare
 
-Siga os passos abaixo para rodar a aplicação localmente:
+Sistema de gerenciamento de pets e cuidados veterinários.
 
-## 1. Instalar dependências
-Na raiz do projeto, execute:
+## Requisitos
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado e rodando
+
+## Como executar
+
+### 1. Clone o repositório
 
 ```bash
-npm install
+git clone https://github.com/israelbernardo22/petCare.git
+cd petCare
+```
 
-2. Rodar o frontend
+### 2. Crie o arquivo de configuração do backend
 
-Abra um terminal e execute:
+```bash
+echo DATABASE_URL="mysql://avnadmin:AVNS_7Uup5mQITg7j3ibF7wf@mysql-pet21af7666-unifei-0d66.l.aivencloud.com:20820/defaultdb?ssl-mode=REQUIRED" > backend/.env
+echo JWT_SECRET=PETCARE2026 >> backend/.env
+```
 
-cd frontend
-npm start
+> No Windows (PowerShell), use:
+> ```powershell
+> "DATABASE_URL=`"mysql://avnadmin:AVNS_7Uup5mQITg7j3ibF7wf@mysql-pet21af7666-unifei-0d66.l.aivencloud.com:20820/defaultdb?ssl-mode=REQUIRED`"" | Out-File -FilePath backend\.env -Encoding utf8
+> "JWT_SECRET=PETCARE2026" | Out-File -FilePath backend\.env -Append -Encoding utf8
+> ```
 
-3. Rodar o backend
+### 3. Suba os containers
 
-Abra outro terminal e execute:
+```bash
+docker compose up --build -d
+```
 
-cd backend
-node app.js
+> O build leva alguns minutos na primeira vez.
 
-✅ Observações
-Certifique-se de ter o Node.js instalado na sua máquina.
-O frontend e o backend devem ser executados simultaneamente em terminais separados.
+### 4. Acesse a aplicação
+
+Abra o navegador em: **http://localhost**
+
+---
+
+## Parar a aplicação
+
+```bash
+docker compose down
+```
+
+## Stack
+
+- **Frontend:** Angular 21 + Bootstrap 5
+- **Backend:** Node.js + Express + Prisma
+- **Banco de dados:** MySQL (Aiven Cloud)
+- **Infraestrutura:** Docker + Nginx
